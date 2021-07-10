@@ -2,6 +2,7 @@ use std::fs;
 use std::env;
 use std::error::Error;
 
+///Struct containing the configuration the user requested for the search
 pub struct Config {
     pub query: String,
     pub filename: String,
@@ -9,6 +10,7 @@ pub struct Config {
 }
 
 impl Config {
+    ///Creates a new Config using the arguments handed to the program
     pub fn new(mut args: env::Args) -> Result<Config, &'static str> {
         args.next();
         let query = match args.next(){
@@ -27,6 +29,7 @@ impl Config {
     }
 }
 
+///runs the search
 pub fn run(config: Config) -> Result<(), Box<dyn Error>>{
     let contents = fs::read_to_string(config.filename)?;
 
